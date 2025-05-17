@@ -1,0 +1,52 @@
+# .github/workflows/ghidra-ci.yml
+name: Build Ghidra Plugin
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'extensions/**'
+      - '.github/workflows/ghidra-ci.yml'
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/ghidra-devsecops:latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build Ghidra plugin
+        run: |
+          cd ghidra
+          gradle -I gradle/support/fetchDependencies.gradle
+          gradle buildGhidra
+
+      - name: Upload plugin build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ghidra-plugin-dist
+          path: ghidra/build/dist/*.zip
+
+  release-assets:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ghidra-plugin-dist
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./ghidra-plugin-dist/*.zip
