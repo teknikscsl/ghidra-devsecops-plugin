@@ -46,3 +46,13 @@
 
 ### Fixed
 - 
+
+## [0.1.2] – 2025-05-17
+### Added
+- support of attaching artifacts to GitHub Releases!
+
+### Changed
+- logchange.sh
+
+### Fixed
+- added support for attaching to GitHub.
