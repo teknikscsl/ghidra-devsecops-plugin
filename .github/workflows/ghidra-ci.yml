@@ -32,19 +32,18 @@ jobs:
         with:
           cache-disabled: true
 
-      - name: Build Ghidra plugin
+      - name: Build LucidExtension plugin
         run: |
-          cd ghidra
-          gradle -I gradle/support/fetchDependencies.gradle
-          gradle buildGhidra
+          cd extensions/LucidExtension
+          gradle build
 
       - name: Rename and package plugin
         run: |
           mkdir -p plugin-dist
-          for file in ghidra/build/dist/*.zip; do
-            base=$(basename "$file")
+          find . -name '*.zip' -exec cp {} plugin-dist/ \;
+          for file in plugin-dist/*.zip; do
             version_tag=$(git describe --tags --abbrev=0 || echo latest)
-            cp "$file" "plugin-dist/lucid-extension-${version_tag}.zip"
+            mv "$file" "plugin-dist/lucid-extension-${version_tag}.zip"
           done
 
       - name: Upload plugin as artifact
@@ -78,5 +77,5 @@ jobs:
       - name: Upload ZIP and notes to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: lucid-ghidra-plugin/*.zip
+          files: plugin-dist/*.zip
           body: ${{ env.RELEASE_NOTES }}
