@@ -1,0 +1,97 @@
+📁 ghidra-devsecops-plugin/
+├── .devcontainer/
+│   ├── devcontainer.json
+│   └── Dockerfile
+├── .github/
+│   └── workflows/
+│       └── ghidra-ci.yml
+├── docs/
+│   ├── screenshots/
+│   │   └── plugin-in-action.png
+│   ├── walkthrough.md
+│   └── index.html
+├── extensions/
+│   └── LucidExtension/
+│       ├── src/
+│       │   └── lucid/
+│       │       └── HelloWorldScript.java
+│       └── module.manifest
+├── scripts/
+│   └── analyze_sample.py
+├── .gitignore
+├── README.md
+├── LICENSE
+├── CONTRIBUTING.md
+
+# docs/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lucidity's DevSecOps-ready Ghidra Plugin Framework">
+  <title>Lucidity Ghidra DevSecOps Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header img {
+      height: 100px;
+    }
+    h1 {
+      color: #1a1a1a;
+    }
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    a {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://lucidityconsult.net/assets/logo.svg" alt="Lucidity Logo">
+    <h1>Ghidra DevSecOps Plugin Toolkit</h1>
+    <p>Secure. Automated. Extendable. Built for analysts by Lucidity Consulting.</p>
+  </header>
+
+  <section>
+    <h2>🔧 Features</h2>
+    <ul>
+      <li>📦 Plugin development ready via DevContainers</li>
+      <li>🔐 Built with CI + security automation in mind</li>
+      <li>💡 Compatible with both Ghidra GUI and headless scripting</li>
+      <li>🧪 Includes Python and Java sample tools</li>
+    </ul>
+
+    <h2>🚀 Get Started</h2>
+    <p>Clone the repository and open in VSCode with DevContainer support:</p>
+    <pre><code>git clone https://github.com/YOUR_USERNAME/ghidra-devsecops-plugin.git
+cd ghidra-devsecops-plugin
+code .</code></pre>
+
+    <h2>📄 Documentation</h2>
+    <p>Visit the <a href="walkthrough.md">walkthrough</a> or view the <a href="../README.md">GitHub README</a>.</p>
+  </section>
+
+  <footer>
+    <p>Maintained with ❤️ by <strong>Lucidity Consulting LLC</strong><br>© 2025</p>
+  </footer>
+</body>
+</html>
