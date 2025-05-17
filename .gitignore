@@ -1,1 +1,52 @@
-.DS_Store\n*.class\n.idea/\n*.log\nbuild/\n__pycache__/
+# .gitignore – Lucid Ghidra DevSecOps Plugin
+
+# Gradle build artifacts
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle wrapper logs and caches
+**/gradle-app.setting
+**/.gradle
+
+# IDE and Editor junk
+*.iml
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# OS-specific
+Thumbs.db
+Desktop.ini
+
+# Cast files (Asciinema local demos)
+*.cast
+
+# Python or Java cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Output plugin zips (still tracked by CI artifacts)
+plugin-dist/
+
+# GitHub Pages artifacts
+/docs/screenshots/*.bak
+
+# Ignore local testing envs and temp outputs
+*.tmp
+*.bak
+*.old
+
+# Optional backups
+*~
+
+# Include Gradle wrapper explicitly
+!gradlew
+!gradlew.bat
+!gradle/wrapper/
+
+# End of .gitignore
