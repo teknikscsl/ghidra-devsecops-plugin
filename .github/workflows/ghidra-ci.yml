@@ -27,8 +27,10 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
 
-      - name: Install Gradle
+      - name: Install Gradle (cache disabled)
         uses: gradle/gradle-build-action@v2
+        with:
+          cache-disabled: true
 
       - name: Build Ghidra plugin
         run: |
@@ -63,7 +65,18 @@ jobs:
         with:
           name: lucid-ghidra-plugin
 
-      - name: Upload ZIP to GitHub Release
+      - name: Generate release notes from changelog
+        id: changelog
+        run: |
+          TAG_NAME=${{ github.event.release.tag_name }}
+          echo "Extracting notes for $TAG_NAME"
+          awk "/## \[${TAG_NAME#v}\]/,/^## \[/" CHANGELOG.md | head -n -1 > release_notes.md
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          cat release_notes.md >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Upload ZIP and notes to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: lucid-ghidra-plugin/*.zip
+          body: ${{ env.RELEASE_NOTES }}
