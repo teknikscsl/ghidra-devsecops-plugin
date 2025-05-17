@@ -1,0 +1,46 @@
+// Plugin project build.gradle for LucidExtension
+
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+ext {
+    // Adjust to your actual Ghidra installation or repo clone
+    GHIDRA_INSTALL_DIR = file(System.getenv("GHIDRA_INSTALL_DIR") ?: "/opt/ghidra")
+}
+
+// Required by Ghidra’s extension build framework
+def ghidraDevJar = file("${GHIDRA_INSTALL_DIR}/Ghidra/Features/Base/lib/GhidraDev.jar")
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs "${GHIDRA_INSTALL_DIR}/Ghidra/Framework/Generic/lib",
+             "${GHIDRA_INSTALL_DIR}/Ghidra/Framework/Utilities/lib",
+             "${GHIDRA_INSTALL_DIR}/Ghidra/Features/Base/lib"
+    }
+}
+
+dependencies {
+    implementation files(ghidraDevJar)
+}
+
+jar {
+    // Optional: for plugin metadata
+    manifest {
+        attributes(
+            'GhidraModule': 'LucidExtension',
+            'GhidraModuleVersion': '1.0',
+            'GhidraModulePackageRoot': 'lucid'
+        )
+    }
+
+    from('data') {
+        into('data')
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

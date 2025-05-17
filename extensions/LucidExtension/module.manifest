@@ -1,0 +1,5 @@
+# Ghidra module manifest for LucidExtension
+ModuleName: LucidExtension
+ModuleVersion: 1.0
+Author: Lucidity Consulting LLC
+Description: Lucid Extension for DevSecOps-driven Ghidra analysis
