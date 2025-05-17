@@ -32,12 +32,20 @@
   <meta name="description" content="Lucidity's DevSecOps-ready Ghidra Plugin Framework">
   <title>Lucidity Ghidra DevSecOps Toolkit</title>
   <style>
+    :root {
+      --bg-light: #f4f4f4;
+      --bg-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #eee;
+      --accent: #0056b3;
+    }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 2rem;
-      background-color: #f4f4f4;
-      color: #333;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
     }
     header {
       text-align: center;
@@ -47,10 +55,10 @@
       height: 100px;
     }
     h1 {
-      color: #1a1a1a;
+      color: var(--text-light);
     }
     section {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
     }
     footer {
@@ -60,11 +68,56 @@
       color: #888;
     }
     a {
-      color: #0056b3;
+      color: var(--accent);
+    }
+    .toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: #ccc;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .badge-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .badge-grid img {
+      height: 30px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .card {
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background-color: #fff;
+      transition: background 0.3s;
+    }
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    body.dark-mode .card {
+      background-color: #2a2a2a;
+    }
+    body.dark-mode h1 {
+      color: var(--text-dark);
     }
   </style>
 </head>
 <body>
+  <button class="toggle" onclick="toggleMode()">🌓 Toggle Dark Mode</button>
   <header>
     <img src="https://lucidityconsult.net/assets/logo.svg" alt="Lucidity Logo">
     <h1>Ghidra DevSecOps Plugin Toolkit</h1>
@@ -72,16 +125,31 @@
   </header>
 
   <section>
-    <h2>🔧 Features</h2>
-    <ul>
-      <li>📦 Plugin development ready via DevContainers</li>
-      <li>🔐 Built with CI + security automation in mind</li>
-      <li>💡 Compatible with both Ghidra GUI and headless scripting</li>
-      <li>🧪 Includes Python and Java sample tools</li>
-    </ul>
+    <div class="badge-grid">
+      <img src="https://img.shields.io/badge/devcontainer-enabled-blue?logo=visualstudiocode" alt="DevContainer">
+      <img src="https://img.shields.io/badge/CI-passing-brightgreen?logo=githubactions" alt="CI">
+    </div>
+
+    <div class="features">
+      <div class="card">
+        <h3>🔧 DevContainer Ready</h3>
+        <p>Launch instantly in VSCode with Docker support.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 CI + Security</h3>
+        <p>Integrated GitHub Actions for plugin integrity checks.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Dual Language Support</h3>
+        <p>Script in Python or Java for automation and reverse engineering.</p>
+      </div>
+      <div class="card">
+        <h3>📄 MIT Licensed</h3>
+        <p>Open-source and freely extensible under MIT.</p>
+      </div>
+    </div>
 
     <h2>🚀 Get Started</h2>
-    <p>Clone the repository and open in VSCode with DevContainer support:</p>
     <pre><code>git clone https://github.com/YOUR_USERNAME/ghidra-devsecops-plugin.git
 cd ghidra-devsecops-plugin
 code .</code></pre>
@@ -93,5 +161,11 @@ code .</code></pre>
   <footer>
     <p>Maintained with ❤️ by <strong>Lucidity Consulting LLC</strong><br>© 2025</p>
   </footer>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 </body>
 </html>
